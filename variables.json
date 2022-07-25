@@ -1,0 +1,17 @@
+{
+  "rmq_username": "cxadmin",
+  "rmq_password": "65DFFv52JNxNSbO8FWti",
+  "rmq_bpdm_sync_queue_name": "catenax-test",
+  "rmq_fraud_sync_queue_name": "catenax-fraud-sync-test",
+  "cdq": {
+    "bpdmSyncMirrors": [
+      {
+        "storageId": "b64d74fa6a2130cb8f5da367317b3a1e",
+        "dataSourceId": "616049c94901bb0001c6c930",
+        "apiKey": "NTQ1YmI5ZjQtYWRhNy00ODAwLTgyNDUtYmU2Y2UyYzFkZmNjOmVvajk0Zmg0bmtkMmo=",
+        "description": "CX Sharing Pool"
+      }
+    ],
+    "fraudSyncAPIKey": "NWNmYzhkODAtNGUyMS00MGM4LTg5ZmMtYzkxYjM2MTNlYjgxOjc0YzB0MGFzdmdhcGE="
+  }
+}
