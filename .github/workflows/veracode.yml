@@ -1,0 +1,43 @@
+name: "Veracode upload and scan"
+
+on:
+  # push:
+  #   branches: [main]
+  # pull_request:
+  # The branches below must be a subset of the branches above
+  # branches: [ main ]
+  # paths-ignore:
+  #   - "**/*.md"
+  #   - "**/*.txt"
+  schedule:
+    # Once a day
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  # Trigger manually
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Build your code according to Veracode rules
+      - name: "Bundle / Build files to scan"
+        run: zip -r product-vas-fraud-dags .
+
+      - name: Run Veracode Upload And Scan
+        uses: veracode/veracode-uploadandscan-action@0.2.1
+        with:
+          # Specify Veracode application name
+          appname: "product-vas-fraud-dags"
+          createprofile: false
+          # Specify path to upload
+          filepath: "./product-vas-fraud-dags.zip"
+          vid: "${{ secrets.ORG_VERACODE_API_ID }}"
+          vkey: "${{ secrets.ORG_VERACODE_API_KEY }}"
