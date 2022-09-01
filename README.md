@@ -1,1 +1,4 @@
-# product-vas-fraud-dags
+# Airflow DAGs
+
+- BPDM Sync
+- Fraud Sync
