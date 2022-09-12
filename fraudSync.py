@@ -29,7 +29,7 @@ def rmq_publish(rmq_username, rmq_password, routing_key, data):
     credentials_encoded = base64_encode(credentials)
 
     response = post(
-        url='https://rabbitmq.catenax-cdq.com/api/exchanges/%2F//publish',
+        url='https://rabbitmq-fraud-dashboard.dev.demo.catena-x.net/api/exchanges/%2F//publish',
         json=rmq_data,
         headers={'Authorization': f'Basic {credentials_encoded}'}
     )
