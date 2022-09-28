@@ -11,7 +11,7 @@ def base64_encode(s):
     return b64.decode('UTF-8')
 
 
-def rmq_publish(rmq_username, rmq_password, routing_key, data):
+def rmq_publish(rmq_username, rmq_password, rmq_url, routing_key, data):
     from json import dumps
     from requests import post
 
@@ -29,7 +29,7 @@ def rmq_publish(rmq_username, rmq_password, routing_key, data):
     credentials_encoded = base64_encode(credentials)
 
     response = post(
-        url='https://rabbitmq-fraud-dashboard.dev.demo.catena-x.net/api/exchanges/%2F//publish',
+        url=rmq_url,
         json=rmq_data,
         headers={'Authorization': f'Basic {credentials_encoded}'}
     )
@@ -44,10 +44,11 @@ def rmq_task():
     rmq_username = Variable.get('rmq_username')
     rmq_password = Variable.get('rmq_password')
     rmq_queue_name = Variable.get('rmq_fraud_sync_queue_name')
+    rmq_url = Variable.get('rmq_url')
 
     cdq = Variable.get('cdq', deserialize_json=True)
     fraud_sync_api_key = cdq['fraudSyncAPIKey']
-    rmq_publish(rmq_username, rmq_password, rmq_queue_name, fraud_sync_api_key)
+    rmq_publish(rmq_username, rmq_password, rmq_url, rmq_queue_name, fraud_sync_api_key)
 
 
 with DAG(
