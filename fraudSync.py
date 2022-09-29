@@ -53,7 +53,7 @@ def rmq_task():
 with DAG(
     'fraud_sync_dag',
     description='Fraud Sync DAG pinging RabbitMQ',
-    schedule_interval=timedelta(minutes=0.5),
+    schedule_interval=timedelta(minutes=5.0),
     start_date=datetime(2022, 1, 1),
     catchup=False,
     tags=['rabbitmq', 'fraud-sync'],
