@@ -46,8 +46,7 @@ def rmq_task():
     rmq_queue_name = Variable.get('rmq_fraud_sync_queue_name')
     rmq_url = Variable.get('rmq_url')
 
-    cdq = Variable.get('cdq', deserialize_json=True)
-    fraud_sync_api_key = cdq['fraudSyncAPIKey']
+    fraud_sync_api_key = Variable.get('cdq_api_key')
     rmq_publish(rmq_username, rmq_password, rmq_url, rmq_queue_name, fraud_sync_api_key)
 
 
